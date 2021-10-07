@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import FormPhoneBook from './FormPhoneBook/FormPhoneBook.jsx';
+import FormPhoneBook from './componets/FormPhoneBook/FormPhoneBook.jsx';
 
 export default class App extends Component {
   state = {
@@ -13,11 +13,22 @@ export default class App extends Component {
     filter: '',
   };
 
+  formSubmitHandler = data => {
+    if (this.state.contacts.find(contact => contact.name === data.name)) {
+      return alert(`${data.name} is alredy in contacts`);
+    } else {
+      data.id = uuidv4();
+      this.setState(prevState => {
+        return { contacts: [...prevState.contacts, data] };
+      });
+    }
+  };
+
   render() {
     return (
       <div>
         <h1>Phonebook</h1>
-        <FormPhoneBook />
+        <FormPhoneBook onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
       </div>
     );

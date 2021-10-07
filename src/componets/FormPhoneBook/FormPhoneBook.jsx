@@ -7,8 +7,8 @@ export default class FormPhoneBook extends Component {
     number: '',
   };
 
-  nameInputId = uuidv4();
-  numberInputId = uuidv4();
+  nameId = uuidv4();
+  numberId = uuidv4();
 
   handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -16,9 +16,9 @@ export default class FormPhoneBook extends Component {
   };
 
   handleSubmit = e => {
-    const { name, number } = e.currentTarget;
+  
     e.preventDefault();
-    this.props.onSubmit(name, number);
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
@@ -26,15 +26,18 @@ export default class FormPhoneBook extends Component {
     this.setState({ name: '', number: '' });
   };
   render() {
+    const { name, number } = this.state;
+    
+
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId}>
+        <label htmlFor={this.nameId}>
           Name
           <input
             type="text"
             name="name"
-            id={this.nameInputId}
-            value={this.state.name}
+            id={this.nameId}
+            value={name}
             onChange={this.handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и
@@ -44,13 +47,13 @@ export default class FormPhoneBook extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label htmlFor={this.numberInputId}>
+        <label htmlFor={this.numberId}>
           Number
           <input
             type="tel"
             name="number"
-            id={this.numberInputId}
-            value={this.state.number}
+            id={this.numberId}
+            value={number}
             onChange={this.handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"

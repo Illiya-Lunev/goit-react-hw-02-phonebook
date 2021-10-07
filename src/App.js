@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import FormPhoneBook from './componets/FormPhoneBook/FormPhoneBook.jsx';
 import ContactList from './componets/ContactList/ContactList.jsx';
+import Filter from './componets/Filters/Filters.jsx';
 
 export default class App extends Component {
   state = {
@@ -41,13 +42,19 @@ export default class App extends Component {
     }));
   };
 
+  handleContactsFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
   render() {
     const visibleContacts = this.getVisibleContacts();
+    const { filter } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
         <FormPhoneBook onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
+        <Filter onChange={this.handleContactsFilter} value={filter} />
         <ContactList
           onDeleteContact={this.deleteContact}
           contacts={visibleContacts}

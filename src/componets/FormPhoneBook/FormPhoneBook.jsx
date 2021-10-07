@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import s from './formPhone.module.css'
 
 export default class FormPhoneBook extends Component {
   state = {
@@ -31,10 +32,11 @@ export default class FormPhoneBook extends Component {
     
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameId}>
+      <form className={s.form} onSubmit={this.handleSubmit}>
+        <label className={s.label} htmlFor={this.nameId}>
           Name
           <input
+            className={s.input}
             type="text"
             name="name"
             id={this.nameId}
@@ -47,9 +49,10 @@ export default class FormPhoneBook extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label htmlFor={this.numberId}>
+        <label className={s.label} htmlFor={this.numberId}>
           Number
           <input
+            className={s.input}
             type="tel"
             name="number"
             id={this.numberId}
@@ -60,7 +63,7 @@ export default class FormPhoneBook extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit">Add to contacts</button>
+        <button className={s.btn} type="submit">Add to contacts</button>
       </form>
     );
   }

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import FormPhoneBook from './componets/FormPhoneBook/FormPhoneBook.jsx';
 import ContactList from './componets/ContactList/ContactList.jsx';
 import Filter from './componets/Filters/Filters.jsx';
+import s from './componets/FormPhoneBook/formPhone.module.css';
 
 export default class App extends Component {
   state = {
@@ -51,9 +52,9 @@ export default class App extends Component {
     const { filter } = this.state;
     return (
       <div>
-        <h1>Phonebook</h1>
+        <h1 className={s.title}>Phonebook</h1>
         <FormPhoneBook onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
+        <h2 className={s.title}>Contacts</h2>
         <Filter onChange={this.handleContactsFilter} value={filter} />
         <ContactList
           onDeleteContact={this.deleteContact}

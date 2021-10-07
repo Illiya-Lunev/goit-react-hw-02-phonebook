@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import s from './contacts.module.css'
 
 export default function ContactItem({ id, name, number, onDeleteContact }) {
-    return <li >
-        <span>{name}</span>
-        <span>{number}</span>
-        <button type="button" onClick={() => onDeleteContact(id)} >Delete</button>
+    return <li  className={s.item}>
+        <span className={s.name}>{name}</span>
+        <span className={s.name}>{number}</span>
+        <button className={s.btn} type="button" onClick={() => onDeleteContact(id)} >Delete</button>
     </li>
 
 }

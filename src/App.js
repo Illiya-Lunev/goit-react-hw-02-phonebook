@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import FormPhoneBook from './componets/FormPhoneBook/FormPhoneBook.jsx';
+import ContactList from './componets/ContactList/ContactList.jsx';
 
 export default class App extends Component {
   state = {
@@ -24,12 +25,33 @@ export default class App extends Component {
     }
   };
 
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => {
+        return contact.id !== contactId;
+      }),
+    }));
+  };
+
   render() {
+    const visibleContacts = this.getVisibleContacts();
     return (
       <div>
         <h1>Phonebook</h1>
         <FormPhoneBook onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
+        <ContactList
+          onDeleteContact={this.deleteContact}
+          contacts={visibleContacts}
+        />
       </div>
     );
   }
